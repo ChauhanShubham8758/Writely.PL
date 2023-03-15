@@ -1,7 +1,10 @@
+using Writely.PL.Configurations;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.ConfigureSqlDatabase(builder.Configuration);
 
 var app = builder.Build();
 

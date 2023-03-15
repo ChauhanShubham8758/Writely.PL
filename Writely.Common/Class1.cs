@@ -1,4 +1,4 @@
-﻿namespace Writely.BLL
+﻿namespace Writely.Common
 {
     public class Class1
     {

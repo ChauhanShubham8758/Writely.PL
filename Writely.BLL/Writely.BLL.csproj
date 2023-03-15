@@ -6,4 +6,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="Infrastructure\Extensions\" />
+    <Folder Include="Infrastructure\Domains\" />
+    <Folder Include="Services\Service\" />
+    <Folder Include="Services\IService\" />
+    <Folder Include="Validators\" />
+    <Folder Include="Automapper\" />
+    <Folder Include="ServiceModels\ResponseModels\" />
+    <Folder Include="ServiceModels\RequestModels\" />
+    <Folder Include="ServiceModels\" />
+  </ItemGroup>
+
 </Project>
