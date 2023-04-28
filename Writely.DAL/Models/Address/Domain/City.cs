@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Writely.DAL.Models.Users.Domain;
 
 namespace Writely.DAL.Models.Address.Domain
 {
@@ -16,5 +17,7 @@ namespace Writely.DAL.Models.Address.Domain
 
         [ForeignKey("StateId")]
         public virtual State State { get; set; }
+
+        public ICollection<User> Users { get; set; }
     }
 }

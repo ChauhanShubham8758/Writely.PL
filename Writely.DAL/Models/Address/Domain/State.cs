@@ -19,4 +19,9 @@ namespace Writely.DAL.Models.Address.Domain
 
         public virtual ICollection<City> Cities { get; set; }
     }
+
+    public class NullState : State
+    {
+
+    }
 }

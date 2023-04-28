@@ -9,14 +9,17 @@
   <ItemGroup>
     <Folder Include="Helpers\" />
     <Folder Include="Infrastructure\Extensions\" />
-    <Folder Include="Infrastructure\Domains\" />
-    <Folder Include="Services\Service\" />
-    <Folder Include="Services\IService\" />
     <Folder Include="Validators\" />
-    <Folder Include="Automapper\" />
-    <Folder Include="ServiceModels\ResponseModels\" />
-    <Folder Include="ServiceModels\RequestModels\" />
-    <Folder Include="ServiceModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="OneOf" Version="3.0.243" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Writely.DAL\Writely.DAL.csproj" />
   </ItemGroup>
 
 </Project>

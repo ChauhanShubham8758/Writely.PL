@@ -17,4 +17,9 @@ namespace Writely.DAL.Models.Address.Domain
 
         public virtual ICollection<State> States { get; set; }
     }
+
+    public class NullCountry : Country
+    {
+
+    }
 }
