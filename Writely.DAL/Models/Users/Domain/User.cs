@@ -23,9 +23,26 @@ namespace Writely.DAL.Models.Users.Domain
         public virtual City City { get; set; }
         public UserDetails UserDetails { get; set; }
         public ICollection<UserSessions> UserSessions { get; set; }
-        public User()
+        protected User()
         {
 
+        }
+
+        public User(string username, string email, byte[] passwordSalt, string password, string firstName, string lastName, 
+                    Gender gender, string phoneNumber, int cityId, bool isActive, DateTime createdAt, DateTime updatedAt)
+        {
+            Username = username;
+            Email = email;
+            PasswordSalt = passwordSalt;
+            Password = password;
+            FirstName = firstName;
+            LastName = lastName;
+            Gender = gender;
+            PhoneNumber = phoneNumber;
+            CityId = cityId;
+            IsActive = isActive;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
         }
     }
 
@@ -35,4 +52,6 @@ namespace Writely.DAL.Models.Users.Domain
         Female,
         Other
     }
+
+    public class NullUser : User { }
 }

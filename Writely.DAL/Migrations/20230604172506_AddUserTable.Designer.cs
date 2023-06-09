@@ -12,7 +12,7 @@ using Writely.DAL.AppDbContext;
 namespace Writely.DAL.Migrations
 {
     [DbContext(typeof(WritelyDbContext))]
-    [Migration("20230410174252_AddUserTable")]
+    [Migration("20230604172506_AddUserTable")]
     partial class AddUserTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -150,7 +150,7 @@ namespace Writely.DAL.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Writely.DAL.Models.Users.Domain.UserDetails", b =>
