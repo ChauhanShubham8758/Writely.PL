@@ -55,7 +55,6 @@ namespace Writely.PL.Controllers
             {
                 return Ok(outcome.AsT1);
             }
-            
         }
     }
 }
