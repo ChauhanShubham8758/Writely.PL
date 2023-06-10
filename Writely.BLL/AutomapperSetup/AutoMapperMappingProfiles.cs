@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Writely.BLL.Mappings.Address;
+using Writely.BLL.Mappings.Users;
 
 namespace Writely.BLL.AutomapperSetup
 {
@@ -7,7 +8,10 @@ namespace Writely.BLL.AutomapperSetup
     {
         public AutoMapperMappingProfiles()
         {
-            CountryMapping.Map(this);   
+            CountryMapping.Map(this);
+            StateMapping.Map(this);
+            CityMapping.Map(this);
+            UserMapping.Map(this);
         }
     }
 }

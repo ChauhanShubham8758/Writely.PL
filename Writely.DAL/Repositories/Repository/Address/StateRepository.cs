@@ -26,7 +26,7 @@ namespace Writely.DAL.Repositories.Repository.Address
 
         public async Task<List<State>> GetStatesByCountryId(int countryId, CancellationToken cancellationToken = default)
         {
-            var statelist = _dbContext.States.Include(c => c.Country).AsQueryable().Where(x => x.CountryId == countryId);
+            var statelist = _dbContext.States.Include(c => c.Country).Where(x => x.CountryId == countryId);
             return await statelist.ToListAsync(cancellationToken);
         }
     }

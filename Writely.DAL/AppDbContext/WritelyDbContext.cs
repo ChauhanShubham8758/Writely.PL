@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Writely.DAL.Models.Address.Domain;
 using Writely.DAL.Models.Address.EfConfiguration;
+using Writely.DAL.Models.Users.Domain;
 
 namespace Writely.DAL.AppDbContext
 {
@@ -8,7 +9,7 @@ namespace Writely.DAL.AppDbContext
     {
         public WritelyDbContext(DbContextOptions<WritelyDbContext> options) : base(options)
         {
-                
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,5 +23,9 @@ namespace Writely.DAL.AppDbContext
         public DbSet<State> States { get; set; }
 
         public DbSet<City> Cities { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<UserLoginAttempts> UserLoginAttempts { get; set; }
     }
 }
