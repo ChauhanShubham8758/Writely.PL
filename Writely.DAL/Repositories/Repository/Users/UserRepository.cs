@@ -31,5 +31,12 @@ namespace Writely.DAL.Repositories.Repository.Users
                 Where(x => x.Id == id).
                 FirstOrDefaultAsync(cancellationToken) ?? new NullUser();
         }
+
+        public async Task<User> GetUserByEmail(string email, CancellationToken cancellationToken = default)
+        {
+            var user = await _dbContext.Users
+                                .FirstOrDefaultAsync(u => u.Email == email, cancellationToken) ?? new NullUser();
+            return user;
+        }
     }
 }

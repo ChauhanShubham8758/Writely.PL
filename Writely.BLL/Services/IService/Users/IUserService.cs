@@ -7,10 +7,8 @@ namespace Writely.BLL.Services.IService.Users
 {
     public interface IUserService
     {
-        Task<OneOf<UserDisplayModel, WritelyError>> CreateUser(AddUserModel model,
-           CancellationToken cancellationToken);
-
-        Task<OneOf<UserDisplayModel, WritelyError>> GetUserById(UserDisplayModel model,
-          CancellationToken cancellationToken);
+        Task<OneOf<UserDisplayModel, WritelyError>> CreateUser(AddUserModel model, CancellationToken cancellationToken);
+        Task<OneOf<UserDisplayModel, WritelyError>> GetUserById(UserDisplayModel model, CancellationToken cancellationToken);
+        Task<OneOf<string, WritelyError>> Login(UserLoginModel userDisplayModel, CancellationToken cancellationToken);
     }
 }

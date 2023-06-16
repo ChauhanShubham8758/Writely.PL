@@ -22,6 +22,13 @@ namespace Writely.PL.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult>LoginUser(UserLoginModel userDisplay, CancellationToken cancellationToken = default)
+        {
+            var outcome = await _userService.Login(userDisplay, cancellationToken);
+            return View();
+        }
+
         [HttpGet]
         public async Task<IActionResult> RegisterUser()
         {
@@ -49,11 +56,12 @@ namespace Writely.PL.Controllers
             var outcome = await _userService.CreateUser(user, cancellationToken);
             if(outcome.IsT1)
             {
+                ViewBag.ErrorMessage = outcome.AsT1.LoggingDescriptor.ErrorMessage.ToString();
                 return BadRequest(outcome.AsT1);
             }
-                else
+            else
             {
-                return Ok(outcome.AsT1);
+                return RedirectToAction("Login","Home");
             }
         }
     }
