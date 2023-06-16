@@ -16,6 +16,9 @@ namespace Writely.DAL.Models.Users.Domain
         public string PhoneNumber { get; set; }
         public int CityId { get; set; }
         public bool IsActive { get; set; }
+        public bool IsUser { get; set; } = true;
+        public bool IsAuthor { get; set; }
+        public bool IsAdmin { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 

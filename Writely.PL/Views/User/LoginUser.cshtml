@@ -1,4 +1,7 @@
-﻿<!-- Loader starts-->
+﻿@using Writely.BLL.ServiceModels.RequestModels.Users
+@model UserLoginModel
+
+<!-- Loader starts-->
 <div class="loader-wrapper">
     <div class="loader"></div>
 </div>
@@ -12,18 +15,20 @@
                 <div>
                     <div><a class="logo text-center" href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/login.png" alt="loginpage"></a></div>
                     <div class="login-main">
-                        <form class="theme-form">
+                        <form class="theme-form" id="signin-form">
                             <h4 class="text-center">Sign in to account</h4>
                             <p class="text-center">Enter your email & password to login</p>
                             <div class="form-group">
-                                <label class="col-form-label">Email Address</label>
-                                <input class="form-control" type="email" required="" placeholder="Test@gmail.com">
+                                <label asp-for="Email" class="col-form-label">Email Address</label>
+                                 <input asp-for="Email" class="form-control" placeholder="example@gmail.com" id="txtLoginEmail">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Password</label>
+                                <label asp-for="Password" class="col-form-label">Password</label>
                                 <div class="form-input position-relative">
-                                    <input class="form-control" type="password" name="login[password]" required="" placeholder="*********">
-                                    <div class="show-hide"><span class="show">                         </span></div>
+                                   @* <input class="form-control" type="password" name="login[password]" placeholder="*********" id="login-password">
+                                    <div class="show-hide"><span class="show"> </span></div>*@
+                                     <input asp-for="Password" class="form-control" type="password" placeholder="*********">
+                                    <div class="show-hide"><span class="show"></span></div>
                                 </div>
                             </div>
                             <div class="form-group mb-0">
@@ -32,11 +37,11 @@
                                     <label class="text-muted" for="checkbox1">Remember password</label>
                                 </div><a class="link" href="forget-password.html">Forgot password?</a>
                                 <div class="text-end mt-3">
-                                    <button class="btn btn-primary btn-block w-100" type="submit">Sign in</button>
+                                    <button class="btn btn-primary btn-block w-100" type="button" id="btn-signin">Sign in</button>
                                 </div>
                             </div>
                             <div class="login-social-title">
-                                <h6>Or Sign in with                 </h6>
+                                <h6>Or Sign in with </h6>
                             </div>
                             <div class="form-group">
                                 <ul class="login-social">

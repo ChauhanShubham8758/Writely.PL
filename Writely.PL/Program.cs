@@ -5,8 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.ConfigureSqlDatabase(builder.Configuration);
+builder.Services.ConfigurationSettings(builder.Configuration);
 builder.Services.ConfigureDependencies();
 builder.Services.AddAutoMapperConfiguration();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddJWTConfiguration(builder.Configuration);
 
 var app = builder.Build();
 

@@ -8,5 +8,7 @@ namespace Writely.DAL.Repositories.IRepository.Users
 
         Task<User> GetUser(int id,CancellationToken cancellationToken = default);
 
+        Task<User> GetUserByEmail(string email, CancellationToken cancellationToken = default);
+
     }
 }

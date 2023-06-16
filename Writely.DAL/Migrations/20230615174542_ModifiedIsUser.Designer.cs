@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Writely.DAL.AppDbContext;
 
@@ -11,9 +12,10 @@ using Writely.DAL.AppDbContext;
 namespace Writely.DAL.Migrations
 {
     [DbContext(typeof(WritelyDbContext))]
-    partial class WritelyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230615174542_ModifiedIsUser")]
+    partial class ModifiedIsUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

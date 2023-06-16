@@ -6,9 +6,16 @@
 <style>
     /* Style for positioning toast */
     .toast {
-        position: absolute;
-        top: 10px;
-        right: 10px;
+        position: fixed;
+        bottom: 10px; /* Adjust the value as needed */
+        right: 10px; /* Adjust the value as needed */
+        width: 300px; /* Adjust the width as needed */
+        z-index: 9999;
+    }
+
+    #LoginMessage
+    {
+        display:none;
     }
 </style>
 
@@ -25,6 +32,17 @@
         </div>
 
         <div class="col-xl-5 p-0">
+            <div id="LoginMessage" class="profile-setup-msg">
+                <div class="msg">
+                    <div id="login-inner-message" class="alert alert-danger" style="text-align:left;">
+                        <button type="button" class="btnclose close"><!--!-->×</button><!--!-->
+                        <span id="_LoginMessage" style="font-size:14px;">
+
+
+                        </span>
+                    </div>
+                </div>
+            </div>
             <div class="login-card">
                 <div>
                     <div>
@@ -40,25 +58,24 @@
                                 @* <label asp-for="FirstName" class="control-label">First Name</label>*@
                                 <div class="row g-2">
                                     <div class="col-6">
-                                        <input asp-for="FirstName" class="form-control" type="text" required="" placeholder="First name">
+                                        <input asp-for="FirstName" class="form-control" type="text" placeholder="First name">
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="LastName" class="form-control" type="text" required="" placeholder="Last name">
+                                        <input asp-for="LastName" class="form-control" type="text" placeholder="Last name">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="Email" class="col-form-label">Email Address</label>
-                                <input asp-for="Email" class="form-control" required="" placeholder="example@gmail.com">
+                                <input asp-for="Email" class="form-control" placeholder="example@gmail.com" id="txtLoginEmail">
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="Password" class="col-form-label">Password</label>
                                 <div class="form-input position-relative">
-                                    <input asp-for="Password" class="form-control" type="password" required="" placeholder="*********">
+                                    <input asp-for="Password" class="form-control" type="password" placeholder="*********">
                                     <div class="show-hide"><span class="show"></span></div>
-                                      <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -97,7 +114,7 @@
 
                             <div class="form-group">
                                 <label asp-for="PhoneNumber" class="col-form-label">Phone Number</label>
-                                <input asp-for="PhoneNumber" class="form-control" required="">
+                                <input asp-for="PhoneNumber" class="form-control">
                             </div>
 
                             <div class="form-group">
@@ -156,6 +173,7 @@
                                 <div class="toast-body">
                                     @*An error occurred while processing your request. Please try again later.*@
                                     <p id="error-message">An error occurred while processing your request. Please try again later.</p>
+                                    <p id="error-message">@ViewBag.ErrorMessage </p>
                                 </div>
                             </div>
                         </div>

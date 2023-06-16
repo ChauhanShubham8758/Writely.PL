@@ -49,6 +49,7 @@ namespace Writely.BLL.Services.Service.User
                 user.IsActive = true;
                 user.CreatedAt = DateTime.UtcNow;
                 user.UpdatedAt = DateTime.UtcNow;
+                user.IsUser = true;
                 var outcome = await _userRepository.SaveUser(user, cancellationToken);
 
                 //3. Send Error When outcome false
@@ -59,7 +60,7 @@ namespace Writely.BLL.Services.Service.User
                 var returnmodel = _mapper.Map<UserDisplayModel>(user);
                 return returnmodel;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var error = new ErrorCreatingUser(ex);
                 return error;
@@ -69,6 +70,39 @@ namespace Writely.BLL.Services.Service.User
         public async Task<OneOf<UserDisplayModel, WritelyError>> GetUserById(UserDisplayModel model, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<OneOf<string, WritelyError>> Login(UserLoginModel model, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                // 1. Validate incoming model
+                var validator = new UserLoginValidator();
+                var valResult = await validator.ValidateAsync(model);
+                if (!valResult.IsValid)
+                {
+                    return new WritelyValidationError(valResult.GetErrorMessagesWithPropertyName());
+                }
+
+                // 2. Getting user by entered email
+                var user = await _userRepository.GetUserByEmail(model.Email, cancellationToken);
+
+                // 3. Encrypting entered password 
+                var result = _helperService.EncryptBySalt(model.Password, user.PasswordSalt);
+
+                // 4. Comparing encrypted password with user password
+                if (user.Password == result)
+                {
+                    var token = _helperService.Authenticate(user);
+                    return token;
+                }
+                return new ErrorFetchingUser();
+            }
+            catch(Exception ex)
+            {
+                var error = new ErrorFetchingUser(ex);
+                return error;
+            }
         }
     }
 }
