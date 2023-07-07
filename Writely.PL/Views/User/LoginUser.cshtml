@@ -1,33 +1,60 @@
 ﻿@using Writely.BLL.ServiceModels.RequestModels.Users
 @model UserLoginModel
 
+<style>
+    /* Style for positioning toast */
+    .toast {
+        position: fixed;
+        bottom: 10px; /* Adjust the value as needed */
+        right: 10px; /* Adjust the value as needed */
+        width: 300px; /* Adjust the width as needed */
+        z-index: 9999;
+    }
+
+    #LoginMessage {
+        display: none;
+    }
+</style>
+
+
+
 <!-- Loader starts-->
-<div class="loader-wrapper">
-    <div class="loader"></div>
-</div>
+
 <!-- Loader ends-->
 <!-- login page start-->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xl-7 order-1"><img class="bg-img-cover bg-center" src="../assets/images/login/1.jpg" alt="loginpage"></div>
+        <div class="col-xl-7 order-1">
+           @* <img class="bg-img-cover bg-center" src="../assets/images/login/1.jpg" alt="loginpage">*@
+            <div id="lottie-animation"></div>
+            </div>
         <div class="col-xl-5 p-0">
             <div class="login-card">
                 <div>
                     <div><a class="logo text-center" href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/login.png" alt="loginpage"></a></div>
                     <div class="login-main">
+                        <div id="LoginMessage" class="profile-setup-msg">
+                            <div class="msg">
+                                <div id="login-inner-message" class="alert alert-danger" style="text-align:left;">
+                                    <button type="button" class="btnclose close"><!--!-->×</button><!--!-->
+                                    <span id="_LoginMessage" style="font-size:14px;">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                         <form class="theme-form" id="signin-form">
                             <h4 class="text-center">Sign in to account</h4>
                             <p class="text-center">Enter your email & password to login</p>
                             <div class="form-group">
                                 <label asp-for="Email" class="col-form-label">Email Address</label>
-                                 <input asp-for="Email" class="form-control" placeholder="example@gmail.com" id="txtLoginEmail">
+                                <input asp-for="Email" class="form-control" placeholder="example@gmail.com" id="login-email">
                             </div>
                             <div class="form-group">
                                 <label asp-for="Password" class="col-form-label">Password</label>
                                 <div class="form-input position-relative">
-                                   @* <input class="form-control" type="password" name="login[password]" placeholder="*********" id="login-password">
+                                    @* <input class="form-control" type="password" name="login[password]" placeholder="*********" id="login-password">
                                     <div class="show-hide"><span class="show"> </span></div>*@
-                                     <input asp-for="Password" class="form-control" type="password" placeholder="*********">
+                                    <input asp-for="Password" class="form-control" type="password" placeholder="*********" id="login-password">
                                     <div class="show-hide"><span class="show"></span></div>
                                 </div>
                             </div>
@@ -56,6 +83,10 @@
                                 @*<a class="ms-2" href="User/">Create Account</a>*@
                                 @Html.ActionLink("Create Account","RegisterUser","User",null,new {@class= "ms-2"})
                             </p>
+
+                           @* <div id="lottie-animation"></div>*@
+
+
                             <script>
                                 (function() {
                                     'use strict';
@@ -77,9 +108,25 @@
 
                             </script>
                         </form>
+
+                        <div class="m-4">
+                            <div class="toast bg-danger" id="errorToast" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                    <strong class="me-auto"><i class="bi bi-exclamation-triangle-fill"></i> Error</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+                                    @*An error occurred while processing your request. Please try again later.*@
+                                    <p id="error-message">An error occurred while processing your request. Please try again later.</p>
+                                    <p id="error-message">@ViewBag.ErrorMessage </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+

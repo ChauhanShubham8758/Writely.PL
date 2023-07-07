@@ -124,10 +124,10 @@
     <value>Please specify your email</value>
   </data>
   <data name="ErrorCreatingUser" xml:space="preserve">
-    <value>There was an error creating investor</value>
+    <value>There was an error creating User</value>
   </data>
   <data name="ErrorFetchingUser" xml:space="preserve">
-    <value>There was an error fetching investor</value>
+    <value>There was an error fetching User</value>
   </data>
   <data name="FirstNameRequired" xml:space="preserve">
     <value>Please specify your first name</value>

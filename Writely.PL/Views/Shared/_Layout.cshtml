@@ -43,9 +43,11 @@
     <link id="color" rel="stylesheet" href="../assets/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    @*<link rel="stylesheet" href="../assets/css/writely/custom.css">*@
 </head>
 <body>
+    
     @*<header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container-fluid">
@@ -106,12 +108,34 @@
     <script type="text/javascript" src="~/assets/js/writely/address.js"></script>
     <script type="text/javascript" src="~/assets/js/writely/login.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
-   @* <script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.10/lottie.min.js"></script>
+
+    @* <script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
 
     @*<script type="text/javascript">
-       
+
     </script>*@
+
+    <script>
+        // Initialize the Lottie animation
+        const animation = lottie.loadAnimation({
+            container: document.getElementById('lottie-animation'), // ID of the container element
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '../assets/lottie icons/lf30_editor_bmaap9xv.json' // URL of the animation JSON file
+        });
+
+        // Initialize the Lottie animation
+        const animation2 = lottie.loadAnimation({
+            container: document.getElementById('lottie-animation-signup'), // ID of the container element
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '../assets/lottie icons/lf30_editor_aaty1hcn.json' // URL of the animation JSON file
+        });
+    </script>
 </body>
 
 </html>
