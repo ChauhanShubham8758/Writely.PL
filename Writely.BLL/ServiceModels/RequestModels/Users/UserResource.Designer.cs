@@ -79,7 +79,7 @@ namespace Writely.BLL.ServiceModels.RequestModels.Users {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There was an error creating investor.
+        ///   Looks up a localized string similar to There was an error creating User.
         /// </summary>
         internal static string ErrorCreatingUser {
             get {
@@ -88,7 +88,7 @@ namespace Writely.BLL.ServiceModels.RequestModels.Users {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There was an error fetching investor.
+        ///   Looks up a localized string similar to There was an error fetching User.
         /// </summary>
         internal static string ErrorFetchingUser {
             get {

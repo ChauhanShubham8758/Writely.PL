@@ -26,6 +26,7 @@ namespace Writely.PL.Configurations
 					ValidAudience = Configuration["JWT:Audience"],
 					IssuerSigningKey = new SymmetricSecurityKey(Key)
 				};
+				o.SaveToken = true;
 			});
 
 		}

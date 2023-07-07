@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Writely.PL.Models;
 
@@ -13,6 +15,8 @@ namespace Writely.PL.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
+        [Authorize(Roles ="User")]
         public IActionResult Index()
         {
             return View();
