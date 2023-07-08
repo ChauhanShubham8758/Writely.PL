@@ -34,17 +34,9 @@ namespace Writely.PL.Controllers
             }
             else
             {
-                //Response.Cookies.Append("AuthToken", outcome.AsT0, new CookieOptions
-                //{
-                //    Expires = DateTime.Now.AddHours(3), // Set the expiration time as needed
-                //    HttpOnly = true, // Ensure the cookie is accessible only through HTTP (not JavaScript)
-                //    Secure = true, // Set to true if using HTTPS
-                //    SameSite = SameSiteMode.Strict // Adjust the SameSite value as per your requirements
-                //});
                 Response.ContentType = "application/json";
                 Response.Headers.Add("Access-Control-Expose-Headers", "Authorization"); // Allow the client to access the Authorization header
                 Response.Headers.Add("Authorization", "Bearer Token" + outcome.AsT0);
-                //HttpContext.Response.Headers.Add("Authorization", $"Bearer {outcome.AsT0}");
                 return Ok( new { outcome.AsT0 });
             }
         }

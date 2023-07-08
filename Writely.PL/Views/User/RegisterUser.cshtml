@@ -13,35 +13,15 @@
         z-index: 9999;
     }
 
-    #LoginMessage
-    {
-        display:none;
+    #LoginMessage {
+        display: none;
     }
 </style>
 
-<!-- Loader starts-->
-<div class="loader-wrapper">
-    <div class="loader"></div>
-</div>
-<!-- Loader ends-->
 <!-- signup page start-->
 <div class="container-fluid p-0">
     <div class="row m-0">
-        <div class="col-xl-7 p-0">
-            @*<img class="bg-img-cover bg-center" src="../assets/images/login/1.jpg" alt="loginpage">*@
-            <div id="lottie-animation-signup"></div>
-        </div>
-
-        <div class="col-xl-5 p-0">
-            <div id="LoginMessage" class="profile-setup-msg">
-                <div class="msg">
-                    <div id="login-inner-message" class="alert alert-danger" style="text-align:left;">
-                        <button type="button" class="btnclose close"><!--!-->×</button><!--!-->
-                        <span id="_LoginMessage" style="font-size:14px;">
-                        </span>
-                    </div>
-                </div>
-            </div>
+        <div class="col-12 p-0">
             <div class="login-card">
                 <div>
                     <div>
@@ -53,27 +33,36 @@
                         <form class="theme-form" id="signup-form">
                             <h4>Create your account</h4>
                             <p>Enter your personal details to create account</p>
+                            <div id="LoginMessage" class="profile-setup-msg">
+                                <div class="msg">
+                                    <div id="login-inner-message" class="alert alert-danger" style="text-align:left;">
+                                        <button type="button" class="btnclose close"><!--!-->×</button><!--!-->
+                                        <span id="_LoginMessage" style="font-size:14px;">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 @* <label asp-for="FirstName" class="control-label">First Name</label>*@
                                 <div class="row g-2">
                                     <div class="col-6">
-                                        <input asp-for="FirstName" class="form-control" type="text" placeholder="First name">
+                                        <input asp-for="FirstName" class="form-control" type="text" placeholder="First name" id="firstName">
                                     </div>
                                     <div class="col-6">
-                                        <input asp-for="LastName" class="form-control" type="text" placeholder="Last name">
+                                        <input asp-for="LastName" class="form-control" type="text" placeholder="Last name" id="lastName">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="Email" class="col-form-label">Email Address</label>
-                                <input asp-for="Email" class="form-control" placeholder="example@gmail.com" id="txtLoginEmail">
+                                <input asp-for="Email" class="form-control" placeholder="example@gmail.com" id="email">
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="Password" class="col-form-label">Password</label>
                                 <div class="form-input position-relative">
-                                    <input asp-for="Password" class="form-control" type="password" placeholder="*********">
+                                    <input asp-for="Password" class="form-control" type="password" placeholder="***" id="password">
                                     <div class="show-hide"><span class="show"></span></div>
                                 </div>
                             </div>
@@ -113,7 +102,7 @@
 
                             <div class="form-group">
                                 <label asp-for="PhoneNumber" class="col-form-label">Phone Number</label>
-                                <input asp-for="PhoneNumber" class="form-control">
+                                <input asp-for="PhoneNumber" class="form-control" id="phoneNumber">
                             </div>
 
                             <div class="form-group">
@@ -158,7 +147,7 @@
                             </div>
                             <p class="mt-4 mb-0 text-center">
                                 Already have an account?
-                                @*<a class="ms-2" href="login.html">Sign in</a>*@
+
                                 @Html.ActionLink("Sign in","LoginUser","User",null,new {@class= "ms-2"})
                             </p>
                         </form>
