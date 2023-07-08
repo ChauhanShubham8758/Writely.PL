@@ -1,9 +1,20 @@
 ﻿/* Sign Up Process */
 $(document).off('click', '#btn-signup').on('click', '#btn-signup', function () {
-    var EmailAddress = $('#login-email').val();
-    var Password = $('#login-password').val();
+    var FirstName = $('#firstName').val();
+    var LastName = $('#lastName').val();
+    var EmailAddress = $('#email').val();
+    var Password = $('#password').val();
+    var PhoneNumber = $('#phoneNumber').val();
 
-    if (EmailAddress == "" || EmailAddress == null) {
+    if (FirstName == "" || FirstName == null) {
+        showLoginAlert("<strong>Error! </strong> Please enter first name.", "alert-danger");
+        return false;
+    }
+    else if (LastName == "" || LastName == null) {
+        showLoginAlert("<strong>Error! </strong> Please enter last name.", "alert-danger");
+        return false;
+    }
+    else if (EmailAddress == "" || EmailAddress == null) {
         showLoginAlert("<strong>Error! </strong> Please enter email address.", "alert-danger");
         return false;
     }
@@ -19,7 +30,16 @@ $(document).off('click', '#btn-signup').on('click', '#btn-signup', function () {
         showLoginAlert("<strong>Error! </strong> Invalid Password.Must have minimum 8 charcters, one capital letter, one small letter, one special character", "alert-danger");
         return false;
     }
+    else if (PhoneNumber == "" || PhoneNumber == null) {
+        showLoginAlert("<strong>Error! </strong> Please enter phone number.", "alert-danger");
+        return false;
+    }
     else {
+        var over = '<div id="overlay">' +
+            '<div id="loading"></div>' +
+            '</div>';
+        $(over).appendTo('body');
+
         $.ajax({
             type: "POST",
             url: "/User/RegisterUser",
@@ -28,18 +48,15 @@ $(document).off('click', '#btn-signup').on('click', '#btn-signup', function () {
                 window.location.href = "/User/LoginUser";
             },
             error: function (response) {
-                //alert(response.responseText)
                 $("#errorToast").toast({
                     autohide: true,
                     delay: 3000 // hide the toast after 3 seconds
                 });
-
                 // Show the error toast
                 $("#errorToast").toast("show");
             }
         });
     }
-
 });
 
 /* Sign-In Process */
@@ -65,33 +82,29 @@ $(document).off('click', '#btn-signin').on('click', '#btn-signin', function () {
         return false;
     }
     else {
+        var over = '<div id="overlay">' +
+            '<div id="loading"></div>' +
+            '</div>';
+        $(over).appendTo('body');
+
         $.ajax({
             type: "POST",
             url: "/User/LoginUser",
             data: $("#signin-form").serialize(),
-            beforeSend: function () {
-                // Add code to show the loader here
-                $('body').append('<div class="loader-box"><div class= "loader-19"></div ></div> ');
-                //$('body').append('<div class="overlay">< div class= "overlay__inner" ><div class="overlay__content"><span class="spinner"></span></div></div ></div >');
-            },
             success: function (response) {
                 var token = response.asT0;
                 localStorage.setItem('jwtToken', token);
-                /*  localStorage.setItem("AuthToken", response);*/
-                $('.overlay').hide();
                 $.ajax({
                     type: "get",
                     url: "/Home/Index",
-                    headers: {"Authorization": "Bearer "+token },
+                    headers: { "Authorization": "Bearer " + token },
                     success: function (res) {
                         $('html').html(res);
                     }
                 });
-                
+
             },
             error: function (response) {
-                $('.overlay').hide();
-                //alert(response.responseText)
                 $("#errorToast").toast({
                     autohide: true,
                     delay: 3000 // hide the toast after 3 seconds
@@ -99,14 +112,9 @@ $(document).off('click', '#btn-signin').on('click', '#btn-signin', function () {
 
                 // Show the error toast
                 $("#errorToast").toast("show");
-            },
-            complete: function () {
-                // Add code to hide the loader here
-                $('.overlay').hide();
             }
         });
     }
-
 });
 
 /* Display Error message */
@@ -134,9 +142,3 @@ function ValidatePassword(passwd) {
 $("#LoginMessage").on("click", ".btnclose", function () {
     $("#LoginMessage").css('display', 'none');
 });
-
-//beforeSend: function (xhr) {
-//    var token = localStorage.getItem('jwtToken');
-//    // Include the token in the request header
-//    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-//},
