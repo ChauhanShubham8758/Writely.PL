@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Net.Http.Headers;
 using Writely.BLL.ServiceModels.RequestModels.Users;
 using Writely.BLL.Services.IService.Address;
 using Writely.BLL.Services.IService.Users;
@@ -26,7 +27,6 @@ namespace Writely.PL.Controllers
         public async Task<IActionResult> LoginUser(UserLoginModel userDisplay, CancellationToken cancellationToken = default)
         {
             var outcome = await _userService.Login(userDisplay, cancellationToken);
-            //return View();
             if (outcome.IsT1)
             {
                 ViewBag.ErrorMessage = outcome.AsT1.LoggingDescriptor.ErrorMessage.ToString();
@@ -34,9 +34,11 @@ namespace Writely.PL.Controllers
             }
             else
             {
-                Response.ContentType = "application/json";
-                Response.Headers.Add("Access-Control-Expose-Headers", "Authorization"); // Allow the client to access the Authorization header
-                Response.Headers.Add("Authorization", "Bearer Token" + outcome.AsT0);
+                var clientHandler = new HttpClientHandler();
+                var client = new HttpClient(clientHandler);
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", outcome.AsT0);
+                TempData["name"] = outcome.AsT0;
                 return Ok( new { outcome.AsT0 });
             }
         }
