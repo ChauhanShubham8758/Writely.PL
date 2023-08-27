@@ -49,7 +49,7 @@ namespace Writely.BLL.Services.Service.User
                 user.IsActive = true;
                 user.CreatedAt = DateTime.UtcNow;
                 user.UpdatedAt = DateTime.UtcNow;
-                user.IsUser = true;
+                user.IsAdmin = true;
                 var outcome = await _userRepository.SaveUser(user, cancellationToken);
 
                 //3. Send Error When outcome false
