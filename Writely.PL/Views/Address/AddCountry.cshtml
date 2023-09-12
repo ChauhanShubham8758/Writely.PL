@@ -3,10 +3,10 @@
 @{
     Layout = null;
 }
-
+@* onsubmit="return jQueryAjaxPost(this);" *@
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="AddCountry" onsubmit="return jQueryAjaxPost(this);">
+        <form asp-action="AddCountry" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>

@@ -16,6 +16,16 @@ namespace Writely.DAL.Models.Address.Domain
         public string Currency { get; set; }
 
         public virtual ICollection<State> States { get; set; }
+        protected Country()
+        {
+        }
+
+        public Country(string name, int countryCode, string currerncy)
+        {
+            Name = name;
+            CountryCode = countryCode;
+            Currency = currerncy;
+        }
     }
 
     public class NullCountry : Country
