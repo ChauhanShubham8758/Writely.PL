@@ -133,34 +133,35 @@ showInPopup = (url, title) => {
 }
 
 
-jQueryAjaxPost = form => {
-    try {
-        $.ajax({
-            type: 'POST',
-            url: form.action,
-            data: new FormData(form),
-            contentType: false,
-            processData: false,
-            success: function (res) {
-                if (res.isValid) {
-                    $('#view-all').html(res.html)
-                    $('#form-modal .modal-body').html('');
-                    $('#form-modal .modal-title').html('');
-                    $('#form-modal').modal('hide');
-                }
-                else
-                    $('#form-modal .modal-body').html(res.html);
-            },
-            error: function (err) {
-                console.log(err)
-            }
-        })
-        //to prevent default form submit event
-        return false;
-    } catch (ex) {
-        console.log(ex)
-    }
-}
+//jQueryAjaxPost = form => {
+//    debugger
+//    try {
+//        $.ajax({
+//            type: 'POST',
+//            url: form.action,
+//            data: new FormData(form),
+//            contentType: false,
+//            processData: false,
+//            success: function (res) {
+//                if (res.isValid) {
+//                    $('#view-all').html(res.html)
+//                    $('#form-modal .modal-body').html('');
+//                    $('#form-modal .modal-title').html('');
+//                    $('#form-modal').modal('hide');
+//                }
+//                else
+//                    $('#form-modal .modal-body').html(res.html);
+//            },
+//            error: function (err) {
+//                console.log(err)
+//            }
+//        })
+//        //to prevent default form submit event
+//        return false;
+//    } catch (ex) {
+//        console.log(ex)
+//    }
+//}
 
 function CountryHome()
 {
@@ -171,6 +172,46 @@ function CountryHome()
         headers: { "Authorization": "Bearer " + token },
         success: function (res) {
             $('html').html(res);
+        }
+    });
+}
+
+function DeleteCountry(id,countryName) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `Do you want to delete the country '${countryName}'?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Here, you can trigger the actual deletion logic
+            // For example, you can make an AJAX request to delete the record
+            // After successful deletion, you can show a success message
+            // If there's an error, you can show an error message
+            // You can use AJAX or Razor Pages handlers for this.
+            // Example:
+            // $.ajax({
+            //     url: '/Address/DeleteCountry',
+            //     type: 'POST',
+            //     data: { countryName: countryName },
+            //     success: function (response) {
+            //         Swal.fire(
+            //             'Deleted!',
+            //             'The country has been deleted.',
+            //             'success'
+            //         );
+            //     },
+            //     error: function (error) {
+            //         Swal.fire(
+            //             'Error!',
+            //             'An error occurred while deleting the country.',
+            //             'error'
+            //         );
+            //     }
+            // });
         }
     });
 }

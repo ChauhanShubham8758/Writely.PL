@@ -54,9 +54,10 @@ namespace Writely.PL.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCountry(AddCountryModel addCountryModel)
+        public async Task<IActionResult> AddCountry(AddCountryModel addCountryModel, CancellationToken cancellationToken)
         {
-            return View();
+            await _countryService.CreateCountry(addCountryModel, cancellationToken);
+            return RedirectToAction("CountryHome");
         }
     }
 }

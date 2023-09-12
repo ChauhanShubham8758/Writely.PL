@@ -20587,7 +20587,6 @@ body {
         .tt-hint:focus {
             outline: 0;
             box-shadow: none;
-            background: white !important;
             border: none;
         }
 
@@ -22695,7 +22694,7 @@ code {
     padding: 0.625rem 0.6875rem;
     background-color: white;
     border-radius: 2px;
-    color: #ffffff;
+    
 }
 
     .form-control:focus, .asColorPicker-input:focus, .dataTables_wrapper select:focus, .jsgrid .jsgrid-table .jsgrid-filter-row input:focus[type=text],
@@ -26369,7 +26368,7 @@ body.avgrund-active {
         font-size: 25px;
         line-height: 1;
         font-weight: 500;
-        color: #ffffff;
+        color: black;
         font-weight: initial;
         margin-bottom: 0;
     }
@@ -26377,7 +26376,7 @@ body.avgrund-active {
     .swal2-modal .swal2-icon,
     .swal2-modal .swal2-success-ring {
         margin-top: 0;
-        margin-bottom: 42px;
+        /*margin-bottom: 42px;*/
     }
 
     .swal2-modal .swal2-buttonswrapper {

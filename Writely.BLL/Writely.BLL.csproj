@@ -25,6 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ServiceModels\RequestModels\Address\AddressResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddressResource.resx</DependentUpon>
+    </Compile>
     <Compile Update="ServiceModels\RequestModels\Users\UserResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -33,6 +38,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="ServiceModels\RequestModels\Address\AddressResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddressResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="ServiceModels\RequestModels\Users\UserResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UserResource.Designer.cs</LastGenOutput>
