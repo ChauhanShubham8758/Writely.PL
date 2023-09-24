@@ -1,6 +1,6 @@
 ﻿namespace Writely.BLL.ServiceModels.RequestModels.Address
 {
-    public class AddCountryModel
+    public class AddOrEditCountryModel
     {
         public string Name { get; set; }
 

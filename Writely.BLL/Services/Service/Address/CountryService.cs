@@ -8,6 +8,7 @@ using Writely.BLL.ServiceModels.RequestModels.Address;
 using Writely.BLL.ServiceModels.ResponseModels.Address;
 using Writely.BLL.Services.IService.Address;
 using Writely.BLL.Validators.Address;
+using Writely.DAL.Models.Address.Domain;
 using Writely.DAL.Repositories.IRepository.Address;
 
 namespace Writely.BLL.Services.Service.Address
@@ -42,7 +43,7 @@ namespace Writely.BLL.Services.Service.Address
             }
         }
 
-        public async Task<OneOf<CountryDisplayModel, WritelyError>> CreateCountry(AddCountryModel addCountryModel, CancellationToken cancellationToken = default)
+        public async Task<OneOf<CountryDisplayModel, WritelyError>> CreateCountry(AddOrEditCountryModel addCountryModel, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -69,6 +70,72 @@ namespace Writely.BLL.Services.Service.Address
             catch (Exception ex)
             {
                 var error = new ErrorCreatingCountry(ex);
+                return error;
+            }
+        }
+
+        public async Task<OneOf<bool, WritelyError>> DeleteCountry(int countryId, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                //1. Check if country exists or not
+                var country = await _countryRepository.GetCountryById(countryId, cancellationToken);
+                if (country is NullCountry) return new ErrorCountryNotFound(countryId);
+
+                //2. Deleting the country if exists
+                return await _countryRepository.RemoveCountry(country);
+            }
+            catch (Exception ex)
+            {
+                var error = new ErrorDeletingCountry(ex);
+                return error;
+            }
+        }
+
+        public async Task<OneOf<CountryDisplayModel, WritelyError>> GetCountryById(int countryId, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var country = await _countryRepository.GetCountryById(countryId, cancellationToken);
+                if (country is NullCountry)
+                {
+                    return new ErrorCountryNotFound(countryId);
+                }
+                else
+                {
+                    var returnModel = _mapper.Map<CountryDisplayModel>(country);
+                    return returnModel;
+                }
+            }
+            catch (Exception ex)
+            {
+                var error = new ErrorDeletingCountry(ex);
+                return error;
+            }
+        }
+
+        public async Task<OneOf<CountryDisplayModel, WritelyError>> PatchCountry(CountryDisplayModel editCountryModel, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                //1. Check if country exists or not
+                var country = await _countryRepository.GetCountryById(editCountryModel.Id, cancellationToken);
+                if (country is NullCountry) return new ErrorCountryNotFound(editCountryModel.Id);
+
+                country = CountryBuilder.ConvertToEdit(editCountryModel);
+                var outcome = await _countryRepository.UpdatCountry(editCountryModel.Id, country, cancellationToken);
+                if (!outcome)
+                {
+                    return new ErrorUpdatingCountry(country.Id);
+                }
+
+                country = await _countryRepository.GetCountryById(editCountryModel.Id, cancellationToken);
+                var returnModel = _mapper.Map<CountryDisplayModel>(country);
+                return returnModel;
+            }
+            catch (Exception ex)
+            {
+                var error = new ErrorUpdatingCountry(editCountryModel.Id, ex);
                 return error;
             }
         }

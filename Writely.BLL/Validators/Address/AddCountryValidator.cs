@@ -3,7 +3,7 @@ using Writely.BLL.ServiceModels.RequestModels.Address;
 
 namespace Writely.BLL.Validators.Address
 {
-    public class AddCountryValidator : AbstractValidator<AddCountryModel>
+    public class AddCountryValidator : AbstractValidator<AddOrEditCountryModel>
     {
         public AddCountryValidator()
         {
