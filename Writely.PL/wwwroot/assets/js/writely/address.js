@@ -187,31 +187,26 @@ function DeleteCountry(id,countryName) {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Here, you can trigger the actual deletion logic
-            // For example, you can make an AJAX request to delete the record
-            // After successful deletion, you can show a success message
-            // If there's an error, you can show an error message
-            // You can use AJAX or Razor Pages handlers for this.
-            // Example:
-            // $.ajax({
-            //     url: '/Address/DeleteCountry',
-            //     type: 'POST',
-            //     data: { countryName: countryName },
-            //     success: function (response) {
-            //         Swal.fire(
-            //             'Deleted!',
-            //             'The country has been deleted.',
-            //             'success'
-            //         );
-            //     },
-            //     error: function (error) {
-            //         Swal.fire(
-            //             'Error!',
-            //             'An error occurred while deleting the country.',
-            //             'error'
-            //         );
-            //     }
-            // });
+             $.ajax({
+                 url: '/Address/DeleteCountry',
+                 type: 'DELETE',
+                 data: { id: id },
+                 success: function (response) {
+                     Swal.fire(
+                         'Deleted!',
+                         'The country has been deleted.',
+                         'success'
+                     );
+                     window.location.reload();
+                 },
+                 error: function (error) {
+                     Swal.fire(
+                         'Error!',
+                         'An error occurred while deleting the country.',
+                         'error'
+                     );
+                 }
+             });
         }
     });
 }

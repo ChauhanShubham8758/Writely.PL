@@ -9,7 +9,7 @@ namespace Writely.DAL.Models.Address.Domain
 
         [Required]
         [MaxLength(255)]
-        public string Name { get; protected set; }
+        public string Name { get; set; }
 
         public int CountryCode { get; set; }
 

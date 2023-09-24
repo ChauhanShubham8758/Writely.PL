@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
 using Writely.BLL.ServiceModels.RequestModels.Address;
+using Writely.BLL.ServiceModels.ResponseModels.Address;
 using Writely.BLL.Services.IService.Address;
+using X.PagedList;
 
 namespace Writely.PL.Controllers
 {
@@ -42,10 +45,16 @@ namespace Writely.PL.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CountryHome()
+        public async Task<IActionResult> CountryHome(int? page = 1)
         {
+            if (page != null && page < 1)
+            {
+                page = 1;
+            }
+
+            var pageSize = 10;
             var outcome = await _countryService.GetAllCountries();
-            return View(outcome.AsT0);
+            return View(outcome.AsT0.ToPagedList(page ?? 1, pageSize));
         }
 
         public IActionResult AddCountry()
@@ -54,9 +63,33 @@ namespace Writely.PL.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCountry(AddCountryModel addCountryModel, CancellationToken cancellationToken)
+        public async Task<IActionResult> AddCountry(AddOrEditCountryModel addCountryModel, CancellationToken cancellationToken)
         {
             await _countryService.CreateCountry(addCountryModel, cancellationToken);
+            return RedirectToAction("CountryHome");
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCountry(int id, CancellationToken cancellationToken)
+        {
+            var outcome = await _countryService.DeleteCountry(id, cancellationToken);
+            if (outcome.AsT0)
+                return Ok(outcome.AsT0);
+            else
+                return BadRequest(outcome.AsT1);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditCountry(int id)
+        {
+            var outcome = await _countryService.GetCountryById(id);
+            return View(outcome.AsT0);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditCountry(CountryDisplayModel countryDisplayModel)
+        {
+            var outcome = await _countryService.PatchCountry(countryDisplayModel);
             return RedirectToAction("CountryHome");
         }
     }
